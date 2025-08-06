@@ -1,8 +1,12 @@
+#---General---#
+
 #set the minimum required version of CMake that other computers must use for this program
 cmake_minimum_required(VERSION 3.15)
 
 #set the project name
 project(CMakeTest VERSION 1.0)
+
+#---Set compiler flags---#
 
 #Create a flags library
 add_library(CMakeTest_compiler_flags INTERFACE)
@@ -23,18 +27,18 @@ target_compile_options(CMakeTest_compiler_flags INTERFACE
                         "$<${is_msvc_cxx}:$<BUILD_INTERFACE:-W3>>"
 )
 
+#---Create executable---#
+
 #create the executable from the main function.
 #This executable can the be linked with other libraries you have created.
 add_executable(Executable
   src/main.cc
-  src/MyPrivateClass/MyPrivateClass.cc
 )
 
-#For example, let's suppose we want to send the executable to the source tree
-#for testing purposes
-set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/install")
-#this will create a directory inside the root of the project called install, if it 
-#is not created, and will place everything that is called with install() there.
+#---Link the project libraries---#
+
+target_link_libraries(Executable PRIVATE src/MyPrivateClass/MyPrivateClass.cc)
+
 
 #Suppose now we need to add a class that is defined inside a folder inside our root tree, so called a library. 
 #Imagine that this class is reusable and we wanted other classes or executables, or even the main program to work with it
@@ -45,7 +49,26 @@ set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/install")
 add_subdirectory(src/MyClass)
 
 #Here we are accessing the library defined in that CMakeLists.txt and linking it to the main executable 
-target_link_libraries(Executable PRIVATE MyClassLibrary CMakeTest_compiler_flags)
+target_link_libraries(Executable PRIVATE MyClassLibrary)
+
+target_link_libraries(Executable INTERFACE CMakeTest_compiler_flags)
+
+#---Add debug flags defined in tools.cmake---#
+
+#We import the flag tools defined inside the tools.cmake
+#This way we can use the flags when building
+include(cmake/tools.cmake)
+
+#---(Optional
+
+#For example, let's suppose we want to send the executable to the source tree
+#for testing purposes
+set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/install" CACHE PATH "Installation Directory")
+#this will create a directory inside the root of the project called install, if it 
+#is not created, and will place everything that is called with install() there.
+#If the deployment is automated, the CI/CD tools will make sure the release path changes t
+
+#---Install the executable inside the binary ---#
 
 #As previously we changed the CMAKE_INSTALL_PREFIX env. variable to point to the install directory, when running
 #cmake --install ., the Executable will go into install/bin
