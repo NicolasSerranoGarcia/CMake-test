@@ -1,0 +1,14 @@
+/home/nico/Escritorio/CMake_test/build/CMakeFiles/Executable.dir
+/home/nico/Escritorio/CMake_test/build/CMakeFiles/edit_cache.dir
+/home/nico/Escritorio/CMake_test/build/CMakeFiles/rebuild_cache.dir
+/home/nico/Escritorio/CMake_test/build/CMakeFiles/list_install_components.dir
+/home/nico/Escritorio/CMake_test/build/CMakeFiles/install.dir
+/home/nico/Escritorio/CMake_test/build/CMakeFiles/install/local.dir
+/home/nico/Escritorio/CMake_test/build/CMakeFiles/install/strip.dir
+/home/nico/Escritorio/CMake_test/build/src/MyClass/CMakeFiles/MyClassLibrary.dir
+/home/nico/Escritorio/CMake_test/build/src/MyClass/CMakeFiles/edit_cache.dir
+/home/nico/Escritorio/CMake_test/build/src/MyClass/CMakeFiles/rebuild_cache.dir
+/home/nico/Escritorio/CMake_test/build/src/MyClass/CMakeFiles/list_install_components.dir
+/home/nico/Escritorio/CMake_test/build/src/MyClass/CMakeFiles/install.dir
+/home/nico/Escritorio/CMake_test/build/src/MyClass/CMakeFiles/install/local.dir
+/home/nico/Escritorio/CMake_test/build/src/MyClass/CMakeFiles/install/strip.dir
