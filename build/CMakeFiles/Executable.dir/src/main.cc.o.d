@@ -1,5 +1,5 @@
 CMakeFiles/Executable.dir/src/main.cc.o: \
- /home/nico/Escritorio/CMake_test/src/main.cc /usr/include/stdc-predef.h \
+ /home/nico/Escritorio/test/src/main.cc /usr/include/stdc-predef.h \
  /usr/include/c++/13/iostream /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -149,5 +149,5 @@ CMakeFiles/Executable.dir/src/main.cc.o: \
  /usr/include/c++/13/bits/basic_ios.tcc \
  /usr/include/c++/13/bits/ostream.tcc /usr/include/c++/13/istream \
  /usr/include/c++/13/bits/istream.tcc \
- /home/nico/Escritorio/CMake_test/include/MyClass/MyClass.h \
- /home/nico/Escritorio/CMake_test/src/MyPrivateClass/MyPrivateClass.h
+ /home/nico/Escritorio/test/include/MyClass/MyClass.h \
+ /home/nico/Escritorio/test/src/MyPrivateClass/MyPrivateClass.h

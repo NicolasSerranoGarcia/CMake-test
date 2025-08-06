@@ -1,8 +1,8 @@
-# Install script for directory: /home/nico/Escritorio/CMake_test/src/MyClass
+# Install script for directory: /home/nico/Escritorio/test/src/MyClass
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/nico/Escritorio/CMake_test/install")
+  set(CMAKE_INSTALL_PREFIX "/home/nico/Escritorio/test/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

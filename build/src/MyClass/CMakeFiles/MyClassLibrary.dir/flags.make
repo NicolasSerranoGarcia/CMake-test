@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/nico/Escritorio/CMake_test/include
+CXX_INCLUDES = -I/home/nico/Escritorio/test/include/MyClass
 
 CXX_FLAGS = -Wall -Wextra -Wshadow -Wformat=2 -Wunused
 

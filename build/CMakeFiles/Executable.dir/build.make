@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/nico/Escritorio/CMake_test
+CMAKE_SOURCE_DIR = /home/nico/Escritorio/test
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/nico/Escritorio/CMake_test/build
+CMAKE_BINARY_DIR = /home/nico/Escritorio/test/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Executable.dir/depend.make
@@ -70,32 +70,32 @@ include CMakeFiles/Executable.dir/progress.make
 include CMakeFiles/Executable.dir/flags.make
 
 CMakeFiles/Executable.dir/src/main.cc.o: CMakeFiles/Executable.dir/flags.make
-CMakeFiles/Executable.dir/src/main.cc.o: /home/nico/Escritorio/CMake_test/src/main.cc
+CMakeFiles/Executable.dir/src/main.cc.o: /home/nico/Escritorio/test/src/main.cc
 CMakeFiles/Executable.dir/src/main.cc.o: CMakeFiles/Executable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nico/Escritorio/CMake_test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Executable.dir/src/main.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Executable.dir/src/main.cc.o -MF CMakeFiles/Executable.dir/src/main.cc.o.d -o CMakeFiles/Executable.dir/src/main.cc.o -c /home/nico/Escritorio/CMake_test/src/main.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nico/Escritorio/test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Executable.dir/src/main.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Executable.dir/src/main.cc.o -MF CMakeFiles/Executable.dir/src/main.cc.o.d -o CMakeFiles/Executable.dir/src/main.cc.o -c /home/nico/Escritorio/test/src/main.cc
 
 CMakeFiles/Executable.dir/src/main.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Executable.dir/src/main.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nico/Escritorio/CMake_test/src/main.cc > CMakeFiles/Executable.dir/src/main.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nico/Escritorio/test/src/main.cc > CMakeFiles/Executable.dir/src/main.cc.i
 
 CMakeFiles/Executable.dir/src/main.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Executable.dir/src/main.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nico/Escritorio/CMake_test/src/main.cc -o CMakeFiles/Executable.dir/src/main.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nico/Escritorio/test/src/main.cc -o CMakeFiles/Executable.dir/src/main.cc.s
 
 CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o: CMakeFiles/Executable.dir/flags.make
-CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o: /home/nico/Escritorio/CMake_test/src/MyPrivateClass/MyPrivateClass.cc
+CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o: /home/nico/Escritorio/test/src/MyPrivateClass/MyPrivateClass.cc
 CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o: CMakeFiles/Executable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nico/Escritorio/CMake_test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o -MF CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o.d -o CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o -c /home/nico/Escritorio/CMake_test/src/MyPrivateClass/MyPrivateClass.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/nico/Escritorio/test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o -MF CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o.d -o CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o -c /home/nico/Escritorio/test/src/MyPrivateClass/MyPrivateClass.cc
 
 CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nico/Escritorio/CMake_test/src/MyPrivateClass/MyPrivateClass.cc > CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nico/Escritorio/test/src/MyPrivateClass/MyPrivateClass.cc > CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.i
 
 CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nico/Escritorio/CMake_test/src/MyPrivateClass/MyPrivateClass.cc -o CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nico/Escritorio/test/src/MyPrivateClass/MyPrivateClass.cc -o CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.s
 
 # Object files for target Executable
 Executable_OBJECTS = \
@@ -110,7 +110,7 @@ Executable: CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o
 Executable: CMakeFiles/Executable.dir/build.make
 Executable: src/MyClass/libMyClassLibrary.a
 Executable: CMakeFiles/Executable.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/nico/Escritorio/CMake_test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Executable"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/nico/Escritorio/test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Executable"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Executable.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -122,6 +122,6 @@ CMakeFiles/Executable.dir/clean:
 .PHONY : CMakeFiles/Executable.dir/clean
 
 CMakeFiles/Executable.dir/depend:
-	cd /home/nico/Escritorio/CMake_test/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/nico/Escritorio/CMake_test /home/nico/Escritorio/CMake_test /home/nico/Escritorio/CMake_test/build /home/nico/Escritorio/CMake_test/build /home/nico/Escritorio/CMake_test/build/CMakeFiles/Executable.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/nico/Escritorio/test/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/nico/Escritorio/test /home/nico/Escritorio/test /home/nico/Escritorio/test/build /home/nico/Escritorio/test/build /home/nico/Escritorio/test/build/CMakeFiles/Executable.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/Executable.dir/depend
 

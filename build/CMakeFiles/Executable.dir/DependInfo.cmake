@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/nico/Escritorio/CMake_test/src/MyPrivateClass/MyPrivateClass.cc" "CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o" "gcc" "CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o.d"
-  "/home/nico/Escritorio/CMake_test/src/main.cc" "CMakeFiles/Executable.dir/src/main.cc.o" "gcc" "CMakeFiles/Executable.dir/src/main.cc.o.d"
+  "/home/nico/Escritorio/test/src/MyPrivateClass/MyPrivateClass.cc" "CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o" "gcc" "CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o.d"
+  "/home/nico/Escritorio/test/src/main.cc" "CMakeFiles/Executable.dir/src/main.cc.o" "gcc" "CMakeFiles/Executable.dir/src/main.cc.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
