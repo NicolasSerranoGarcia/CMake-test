@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/Executable.dir/src/main.cc.o CMakeFiles/Executable.dir/src/MyPrivateClass/MyPrivateClass.cc.o -o Executable  src/MyClass/libMyClassLibrary.a 

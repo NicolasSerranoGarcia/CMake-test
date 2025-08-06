@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "MyClass/MyClass.h"
+#include "MyClass.h"
 #include "MyPrivateClass/MyPrivateClass.h"
 
 int main(){

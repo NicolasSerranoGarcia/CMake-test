@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "MyClass/MyClass.h"
+#include "MyClass.h"
 
 void MyClass::printA(){
     std::cout << a << std::endl;

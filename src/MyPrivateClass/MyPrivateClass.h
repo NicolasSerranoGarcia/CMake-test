@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MyClass/MyClass.h"
+#include "MyClass.h"
 
 class MyPrivateClass{
     public:
