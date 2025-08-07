@@ -38,9 +38,18 @@ include(${CMAKE_SOURCE_DIR}/cmake/tools.cmake)
 #when the flag BUILD_TESTING is set to true.
 include(${CMAKE_SOURCE_DIR}/cmake/tests.cmake)
 
-#---add google tests as a sudirecctory---#
+#---Add CPM installer from cmake/---#
 
-add_subdirectory(external/google_test)
+include(cmake/CPM.cmake)
+
+#---add google tests with CPM---#
+
+CPMAddPackage(
+  NAME GoogleTest
+  GITHUB_REPOSITORY google/googletest
+  GIT_TAG v1.14.0
+  OPTIONS "INSTALL_GTEST OFF"
+)
 
 #---Create executable---#
 
