@@ -7,13 +7,11 @@ int main(){
 
     std::cout << "Hello, World!" << std::endl;
 
-    MyClass newClass;
+    MyClass newClass(23);
 
     newClass.printA();
 
-    MyPrivateClass privateClass;
-
-    privateClass.printB();
+    MyPrivateClass privateClass();
 
     return 0;
 }

@@ -27,6 +27,21 @@ target_compile_options(CMakeTest-compiler-flags INTERFACE
                         "$<${is-msvc-cxx}:$<BUILD_INTERFACE:-W3>>"
 )
 
+#---Add debug flags defined in tools.cmake---#
+
+include(${CMAKE_SOURCE_DIR}/cmake/tools.cmake)
+
+#---Add test enable flag defined in tests.cmake---#
+
+#Note that this module does not add the tests itself, but the flag
+#that does. So the tests are only accesible from this CMakeLists.txt
+#when the flag BUILD_TESTING is set to true.
+include(${CMAKE_SOURCE_DIR}/cmake/tests.cmake)
+
+#---add google tests as a sudirecctory---#
+
+add_subdirectory(external/google_test)
+
 #---Create executable---#
 
 #create the executable from the main function.
@@ -49,14 +64,13 @@ target_link_libraries(Executable INTERFACE CMakeTest-compiler-flags)
 #can now be accessed from this file.
 add_subdirectory(source/my_class)
 
+#Even though the library is private, in order for other CMakeLists.txt from below to access the private class library, we need to add the subdirectory.
+#This way, whenever a module wants to use the private library in it's code, we 
+add_subdirectory(source/my_private_class)
+
+
 #Here we are accessing the library defined in that CMakeLists.txt and linking it to the main executable 
 target_link_libraries(Executable PRIVATE my_class_library)
-
-#---Add debug flags defined in tools.cmake---#
-
-#We import the flag tools defined inside the tools.cmake
-#This way we can use the flags when building
-include(${CMAKE_SOURCE_DIR}/cmake/tools.cmake)
 
 #---If there is a need to install (f.e CI/CD release)---#
 
@@ -73,6 +87,3 @@ set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_LIST_DIR}/install")
 #As previously we changed the CMAKE_INSTALL_PREFIX env. variable to point to the install directory, when running
 #cmake --install ., the Executable will go into install/bin
 install(TARGETS Executable DESTINATION bin)
-
-include(CTest)
-
