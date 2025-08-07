@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "MyClass.h"
-#include "MyPrivateClass/MyPrivateClass.h"
+#include "my_class.h"
+#include "my_private_class/my_private_class.h"
 
 int main(){
 

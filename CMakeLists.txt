@@ -9,22 +9,22 @@ project(CMakeTest VERSION 1.0)
 #---Set compiler flags---#
 
 #Create a flags library
-add_library(CMakeTest_compiler_flags INTERFACE)
+add_library(CMakeTest-compiler-flags INTERFACE)
 #set the c++ standard to be C++11.
 #Every library or executable that links this library will be required to have C++11
 #Interface here represents that the attribute itself does not apply to the library, but to 
 #the ones who link it
-target_compile_features(CMakeTest_compiler_flags INTERFACE cxx_std_11)
+target_compile_features(CMakeTest-compiler-flags INTERFACE cxx_std_11)
 
 #create two variables to check which compile does the user have.
 #In this case we are distinguishing between Linux/MacOS and Windows.
 #This is useful because the flags from gcc are not the same used in MSVC
-set(is_gcc-type_cxx "$<COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU,LCC>")
-set(is_msvc_cxx "$<COMPILE_LANG_AND_ID:CXX,MSVC>")
+set(is-gcc-type-cxx "$<COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU,LCC>")
+set(is-msvc-cxx "$<COMPILE_LANG_AND_ID:CXX,MSVC>")
 
-target_compile_options(CMakeTest_compiler_flags INTERFACE 
-                        "$<${is_gcc-type_cxx}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused>>"
-                        "$<${is_msvc_cxx}:$<BUILD_INTERFACE:-W3>>"
+target_compile_options(CMakeTest-compiler-flags INTERFACE 
+                        "$<${is-gcc-type-cxx}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused>>"
+                        "$<${is-msvc-cxx}:$<BUILD_INTERFACE:-W3>>"
 )
 
 #---Create executable---#
@@ -32,41 +32,41 @@ target_compile_options(CMakeTest_compiler_flags INTERFACE
 #create the executable from the main function.
 #This executable can the be linked with other libraries you have created.
 add_executable(Executable
-  src/main.cc
+  source/main.cc
 )
 
+#---link dependencies that are internal---#
+target_sources(Executable PRIVATE ${CMAKE_CURRENT_LIST_DIR}/source/my_private_class/my_private_class.cc)
+
 #---Link the project libraries---#
-
-target_link_libraries(Executable PRIVATE src/MyPrivateClass/MyPrivateClass.cc)
-
+target_link_libraries(Executable INTERFACE CMakeTest-compiler-flags)
 
 #Suppose now we need to add a class that is defined inside a folder inside our root tree, so called a library. 
 #Imagine that this class is reusable and we wanted other classes or executables, or even the main program to work with it
 
 #We can create a second CMakeLists.txt to reference that library.
 #IF we add the directory where that CMakeLists.txt is as a subdirectory, the libraries, executables (for example test executables), variables...
-#can now be accessed from this file. 
-add_subdirectory(src/MyClass)
+#can now be accessed from this file.
+add_subdirectory(source/my_class)
 
 #Here we are accessing the library defined in that CMakeLists.txt and linking it to the main executable 
-target_link_libraries(Executable PRIVATE MyClassLibrary)
-
-target_link_libraries(Executable INTERFACE CMakeTest_compiler_flags)
+target_link_libraries(Executable PRIVATE my_class_library)
 
 #---Add debug flags defined in tools.cmake---#
 
 #We import the flag tools defined inside the tools.cmake
 #This way we can use the flags when building
-include(cmake/tools.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/tools.cmake)
 
-#---(Optional
+#---If there is a need to install (f.e CI/CD release)---#
 
 #For example, let's suppose we want to send the executable to the source tree
 #for testing purposes
-set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/install" CACHE PATH "Installation Directory")
+set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_LIST_DIR}/install")
 #this will create a directory inside the root of the project called install, if it 
 #is not created, and will place everything that is called with install() there.
-#If the deployment is automated, the CI/CD tools will make sure the release path changes t
+#If the deployment is automated, the CI/CD tools will specifically create the package to release
+#inside install, and then compress it to create a certain release
 
 #---Install the executable inside the binary ---#
 
