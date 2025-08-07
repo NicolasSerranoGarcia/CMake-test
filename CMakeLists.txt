@@ -55,15 +55,15 @@ CPMAddPackage(
 
 #create the executable from the main function.
 #This executable can the be linked with other libraries you have created.
-add_executable(Executable
+add_executable(CMakeTest
   source/main.cc
 )
 
 #---link dependencies that are internal---#
-target_sources(Executable PRIVATE ${CMAKE_CURRENT_LIST_DIR}/source/my_private_class/my_private_class.cc)
+target_sources(CMakeTest PRIVATE ${CMAKE_CURRENT_LIST_DIR}/source/my_private_class/my_private_class.cc)
 
 #---Link the project libraries---#
-target_link_libraries(Executable INTERFACE CMakeTest-compiler-flags)
+target_link_libraries(CMakeTest INTERFACE CMakeTest-compiler-flags)
 
 #Suppose now we need to add a class that is defined inside a folder inside our root tree, so called a library. 
 #Imagine that this class is reusable and we wanted other classes or executables, or even the main program to work with it
@@ -79,7 +79,7 @@ add_subdirectory(source/my_private_class)
 
 
 #Here we are accessing the library defined in that CMakeLists.txt and linking it to the main executable 
-target_link_libraries(Executable PRIVATE my_class_library)
+target_link_libraries(CMakeTest PRIVATE my_class_library)
 
 #---If there is a need to install (f.e CI/CD release)---#
 
@@ -94,5 +94,5 @@ set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_LIST_DIR}/install")
 #---Install the executable inside the binary ---#
 
 #As previously we changed the CMAKE_INSTALL_PREFIX env. variable to point to the install directory, when running
-#cmake --install ., the Executable will go into install/bin
-install(TARGETS Executable DESTINATION bin)
+#cmake --install ., the CMakeTest will go into install/bin
+install(TARGETS CMakeTest DESTINATION bin)

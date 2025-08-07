@@ -2,4 +2,4 @@
 
 [] Add support for benchmark
 
-[] Add support for the library to be found with fin_package(). See 
+[] Add support for CPack
