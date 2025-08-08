@@ -3,8 +3,12 @@
 #set the minimum required version of CMake that other computers must use for this program
 cmake_minimum_required(VERSION 3.15)
 
+#Read the version from the file
+file(READ "${CMAKE_SOURCE_DIR}/VERSION" PROJECT_VERSION_STRING)
+message(STATUS "Project version: ${PROJECT_VERSION_STRING}")
+
 #set the project name
-project(CMakeTest VERSION 1.0)
+project(CMakeTest VERSION ${PROJECT_VERSION_STRING})
 
 #---Build location---#
 
@@ -131,7 +135,7 @@ elseif(UNIX)
 endif()
 
 include(InstallRequiredSystemLibraries)
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 set(CPACK_PACKAGE_VERSION_MAJOR "${CMakeTest_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${CMakeTest_VERSION_MINOR}")
 set(CPACK_SOURCE_GENERATOR "TGZ")

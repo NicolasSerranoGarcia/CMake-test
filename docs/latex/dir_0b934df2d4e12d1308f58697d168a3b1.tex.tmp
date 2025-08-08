@@ -1,0 +1,9 @@
+\doxysection{include/my\+\_\+class Directory Reference}
+\hypertarget{dir_0b934df2d4e12d1308f58697d168a3b1}{}\label{dir_0b934df2d4e12d1308f58697d168a3b1}\index{include/my\_class Directory Reference@{include/my\_class Directory Reference}}
+Directory dependency graph for my\+\_\+class\+:
+% FIG 0
+\doxysubsubsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \mbox{\hyperlink{my__class_8h}{my\+\_\+class.\+h}}
+\end{DoxyCompactItemize}

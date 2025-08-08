@@ -2,7 +2,7 @@
 
 include(CTest)
 
-if(BUILD_TESTING)
+if(BUILD_TESTS)
     message(STATUS "Building tests is ENABLED")
     enable_testing()
     #add support for tests. Inside the CMakeLists.txt

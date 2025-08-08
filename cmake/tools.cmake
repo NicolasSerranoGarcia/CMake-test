@@ -21,9 +21,11 @@ if(USE_SANITIZER OR USE_STATIC_ANALYZER)
 
   if(USE_SANITIZER)
     include(${cmake-scripts_SOURCE_DIR}/sanitizers.cmake)
+    message(STATUS "building with SANITIZER is ON")
   endif()
 
   if(USE_STATIC_ANALYZER)
+    message(STATUS "building with STATIC ANALYZER is ON")
     if("clang-tidy" IN_LIST USE_STATIC_ANALYZER)
       set(CLANG_TIDY
           ON
@@ -74,7 +76,10 @@ if(USE_SANITIZER OR USE_STATIC_ANALYZER)
   endif()
 endif()
 
-# enables CCACHE support through the USE_CCACHE flag possible values are: YES, NO or equivalent
-if(USE_CCACHE)
-  CPMAddPackage("gh:TheLartians/Ccache.cmake@1.2.4")
+if(NOT USE_SANITIZER)
+  message(STATUS "building with SANITIZER is OFF")
+endif()
+
+if(NOT USE_STATIC_ANALYZER)
+  message(STATUS "building with STATIC_ANALYZER is OFF")
 endif()

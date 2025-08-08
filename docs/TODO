@@ -4,6 +4,8 @@
 
 [X] Add support for CPack
 
-[] Add support for doxygen
+[X] Add support for doxygen
 
 [] add command availability and general workflow using commands
+
+[] Add github commit naming convention

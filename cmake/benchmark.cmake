@@ -1,4 +1,4 @@
-option(BUILD_BENCHMARK "build benchmark" ON)
+option(BUILD_BENCHMARK "build benchmark" OFF)
 
 if(BUILD_BENCHMARK)
     message(STATUS "Building benchmark is ENABLED")
