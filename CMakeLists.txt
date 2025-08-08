@@ -6,6 +6,12 @@ cmake_minimum_required(VERSION 3.15)
 #set the project name
 project(CMakeTest VERSION 1.0)
 
+#---Build location---#
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+
 #---Set compiler flags---#
 
 #Create a flags library
@@ -113,3 +119,20 @@ set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_LIST_DIR}/install")
 #As previously we changed the CMAKE_INSTALL_PREFIX env. variable to point to the install directory, when running
 #cmake --install ., the CMakeTest will go into install/bin
 install(TARGETS CMakeTest DESTINATION bin)
+
+#Support for CPack
+
+if(WIN32)
+    set(CPACK_GENERATOR "ZIP")
+elseif(APPLE)
+    set(CPACK_GENERATOR "TGZ")
+elseif(UNIX)
+    set(CPACK_GENERATOR "TGZ")
+endif()
+
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.md")
+set(CPACK_PACKAGE_VERSION_MAJOR "${CMakeTest_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${CMakeTest_VERSION_MINOR}")
+set(CPACK_SOURCE_GENERATOR "TGZ")
+include(CPack)
