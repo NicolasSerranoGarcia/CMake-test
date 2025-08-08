@@ -202,6 +202,8 @@ int add(int a, int b);
   - `ci` – Continuous Integration changes
   - `chore` – Other changes (e.g., maintenance)
 
+> Note that you should only use one type per commit. Additional info can go in parenthesis before the ":"
+
 ---
 
 ### 💻 Commit from Git Bash
