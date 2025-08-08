@@ -72,6 +72,18 @@
 
 You can pass these flags when running `cmake ..` to control what gets built or enabled.
 
+### Build Type
+
+You can build the program in different types, depending on if you want a debug or a release build. These flags are provided by CMake itself, and run optimizations, debug flags... that are useful for each use case
+
+```bash
+cmake -DCMAKE_BUILD_TYPE=Debug ..
+cmake -DCMAKE_BUILD_TYPE=Release ..
+```
+
+Note that it doesn't make sense to use the upcoming flags for a release type.
+
+
 ### 🔬 Build Options
 
 | Flag                     | DESCRIPTION                       | Default |
@@ -79,7 +91,6 @@ You can pass these flags when running `cmake ..` to control what gets built or e
 | `-DBUILD_TESTS=ON\|OFF`   | Enables/disables building tests      | OFF    |
 | `-DBUILD_BENCHMARK=ON\|OFF`| Enables/disables building benchmarks | OFF      |
 
----
 
 ### 🧼 Sanitizers
 
@@ -95,7 +106,6 @@ cmake .. -DUSE_SANITIZER=Leak
 cmake .. -DUSE_SANITIZER="Address;Undefined"  # multiple sanitizers
 ```
 
----
 
 ### 🔍 Static Analyzers
 
