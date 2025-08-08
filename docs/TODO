@@ -1,5 +1,5 @@
 # Start
 
-[] Add support for benchmark
+[/] Add support for benchmark: fix "Failed to match any benchmarks against regex: ." error when trying to run the executable
 
 [] Add support for CPack

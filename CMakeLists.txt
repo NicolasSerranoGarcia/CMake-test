@@ -36,7 +36,14 @@ include(${CMAKE_SOURCE_DIR}/cmake/tools.cmake)
 #Note that this module does not add the tests itself, but the flag
 #that does. So the tests are only accesible from this CMakeLists.txt
 #when the flag BUILD_TESTING is set to true.
-include(${CMAKE_SOURCE_DIR}/cmake/tests.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/test.cmake)
+
+#---Add benchmark enable flag defined in benchmark.cmake---#
+
+#Note that this module does not add the benchmark itself, but the flag
+#that does. So the benchmark is only accessible from this CMakeLists.txt
+#when the flag BUILD_BENCHMARK is set to true.
+include(${CMAKE_SOURCE_DIR}/cmake/benchmark.cmake)
 
 #---Add CPM installer from cmake/---#
 
@@ -49,6 +56,16 @@ CPMAddPackage(
   GITHUB_REPOSITORY google/googletest
   GIT_TAG v1.14.0
   OPTIONS "INSTALL_GTEST OFF"
+  OPTIONS "BENCHMARK_DOWNLOAD_DEPENDENCIES=ON"
+)
+
+#---Add google benchmark with CPM---#
+
+CPMAddPackage(
+  NAME benchmark
+  GITHUB_REPOSITORY google/benchmark
+  GIT_TAG v1.7.1
+  OPTIONS "BENCHMARK_ENABLE_TESTING OFF"
 )
 
 #---Create executable---#
