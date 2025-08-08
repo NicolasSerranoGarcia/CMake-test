@@ -1,1 +1,1 @@
-This repo is just a setup for a CMake environment
+This repo is just a setup for a CMake environment.
