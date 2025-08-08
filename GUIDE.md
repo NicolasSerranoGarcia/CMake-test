@@ -1,67 +1,159 @@
-<!--Add some explanation outside of the CMakeLists.txt and also IMPORTANT add all the commands available for the build and debugging. 
-Make a walkthrough of a how a real workflow would go using the commands and what are the results-->
-Guide
+# 🛠️ Project Build & Workflow Guide
 
-One should position itself on the folder build/ for executing any of the following commands.
+> **📍 Note:** All commands are intended to be executed from within the `build/` directory.
 
-Grouping all useful commands:
+---
 
-ctest -D Experimental   # local
-ctest -D Nightly        # daily
-ctest -D Continuous     # CI/CD (push, merge, etc.)
+## 📁 Initial Setup
 
+1. If `build/` doesn't exist, create it:
 
+   ```bash
+   mkdir build
+   ```
 
+2. Navigate to the `build/` directory:
 
-"cmake ../" creates the builder (makefiles and libraries)
+   ```bash
+   cd build
+   ```
 
-Creating the build with flags:
-Optionally one can build the project with certain flags that enable or disable some tools:
+3. Run CMake to generate the build system:
 
-BUilding benchmarks:
+   ```bash
+   cmake ..
+   ```
 
+   Optionally, you can add flags to enable tools or configure the build (see below).
 
-cmake ../ -DBUILD_BENCHMARK=<OFF|ON>
-by default it is ON
+4. Build the project:
 
-cmake ../ -DBUILD_TESTS=<OFF|ON>
-by default it is ON
+   ```bash
+   cmake --build .
+   ```
 
-Sanitizers
+5. Run the program manually to check if the added code works.
 
+6. Run the test suite:
+
+   ```bash
+   ctest
+   ```
+
+   - To run specific tests by name:
+
+     ```bash
+     ctest -R <regex>
+     ```
+
+     Example:
+     ```bash
+     ctest -R class
+     ```
+
+     > **Note:** Google Test uses the format `<test_suite>.<test_name>`, so you can target individual tests like:
+     ```bash
+     ctest -R MyTestSuite.MyTestCase
+     ```
+
+7. Write new tests for your feature.
+
+8. Commit your changes to the current branch (see commit format below).
+
+9. If you have a CI pipeline, it should run the tests across different OSes. If not, test manually.
+
+10. If something breaks, return to step 3, fix the problem, and do **not** push until resolved.
+
+11. Once the feature is complete and stable, consider creating a release.
+
+---
+
+## ⚙️ CMake Build Flags
+
+You can pass these flags when running `cmake ..` to control what gets built or enabled.
+
+### 🔬 Build Options
+
+| Flag                     | DESCRIPTION                       | Default |
+|--------------------------|--------------------------------------|---------|
+| `-DBUILD_TESTS=ON\|OFF`   | Enables/disables building tests      | OFF    |
+| `-DBUILD_BENCHMARK=ON\|OFF`| Enables/disables building benchmarks | OFF      |
+
+---
+
+### 🧼 Sanitizers
+
+Enable runtime checks for common bugs:
+
+```bash
 cmake .. -DUSE_SANITIZER=Address
 cmake .. -DUSE_SANITIZER=Thread
 cmake .. -DUSE_SANITIZER=Memory
 cmake .. -DUSE_SANITIZER=MemoryWithOrigins
 cmake .. -DUSE_SANITIZER=Undefined
 cmake .. -DUSE_SANITIZER=Leak
-cmake .. -DUSE_SANITIZER="Address;Undefined"  # multiple sanitizer
+cmake .. -DUSE_SANITIZER="Address;Undefined"  # multiple sanitizers
+```
 
-Static analyzers
+---
 
+### 🔍 Static Analyzers
+
+Run static analysis tools during the build:
+
+```bash
 cmake .. -DUSE_STATIC_ANALYZER=clang-tidy
 cmake .. -DUSE_STATIC_ANALYZER=cppcheck
 cmake .. -DUSE_STATIC_ANALYZER=iwyu
-cmake .. -DUSE_STATIC_ANALYZER="clang-tidy;iwyu;cppcheck" #multiple sanitizers
+cmake .. -DUSE_STATIC_ANALYZER="clang-tidy;iwyu;cppcheck"  # multiple tools
+```
 
-installing the project inside the folder install/:
+---
 
-cmake --install .
+## 📦 Other CMake Tools
 
+### 🏗️ Build and Install
+
+```bash
 cmake --build .
+cmake --install .
+```
 
+Installs the project to the `install/` directory.
 
+### 📦 CPack (Packaging)
 
-cpack -> automated: creates a different package depending on the platform
+Run to create platform-specific install packages:
 
-Doxygen:
+```bash
+cpack
+```
 
-generate documentation:
+---
 
+## 🧪 CTest Modes
+
+CTest provides different modes for testing:
+
+| Command                   | Description                          |
+|---------------------------|--------------------------------------|
+| `ctest -D Experimental`   | For local development testing        |
+| `ctest -D Nightly`        | For daily scheduled testing          |
+| `ctest -D Continuous`     | For CI/CD pipelines (on push, etc.)  |
+
+---
+
+## 📚 Documentation with Doxygen
+
+### 📝 Generate Documentation
+
+```bash
 doxygen Doxyfile
+```
 
-general syntax
+### 🧾 Example of Doxygen-style Comment:
 
+```cpp
 /**
  * @brief Adds two integers.
  * 
@@ -72,44 +164,40 @@ general syntax
  * @return The result of a + b.
  */
 int add(int a, int b);
+```
 
+---
 
-when adding new code or features to the program the general sequence would be
+## 📌 Commit Message Convention (Conventional Commits)
 
-1. if build/ deosn't exist, create it
+### ✍️ Format
 
-2. cd build
-
-3. cmake ../ [TOOLS MENTIONED BEFORE IF NEEDED]
-
-4. cmake --build .
-
-5. try the program by yourself and see if the added code works for the case you thought
-
-6. If it seems good at first glance, run the tests: run "ctest".
-
-    6.1 if you are only interested in certain tests, you can run an additional command: ctest -R <regex>
-        e.g if you want to run a test whose name contains the word "class" you would run: ctest -R class
-        Note: the tests are built with google tests, so a given test has it's name given by:
-            <test_suite>.<test_name>
-            This means that a certain test can be run by using ctest -R <test_suite>.<test_name>
-
-7. Create new tests for the thing you just created
-
-8. committing to the branch you are currently in. 
-
-9. If there is a CI pipeline, then it should run the tests in each OS to make sure nothing breaks. If not, then you should try it by yourself
-
-10. If something breaks during the CI pipeline, go back to point 3 and fix the problem. Make sure the next commit isn't pushed until you fix the error, or part of it.
-
-11. When the feature is correctly implemented, consider creating a release. If not, accumulate features until you decide to add a release.
-
-General commit message convention:
-
+```
 <type>[optional scope]: <description>
 
 [optional body]
 
 [optional footer(s)]
+```
 
-type = fix|feat|build|chore|ci|docs|style|refactor|perf|test
+- `type` can be:
+  - `feat` – New feature
+  - `fix` – Bug fix
+  - `docs` – Documentation change
+  - `style` – Code formatting (no logic change)
+  - `refactor` – Code refactor (no behavior change)
+  - `perf` – Performance improvements
+  - `test` – Adding/modifying tests
+  - `build` – Build system or dependency changes
+  - `ci` – Continuous Integration changes
+  - `chore` – Other changes (e.g., maintenance)
+
+---
+
+### 💻 Commit from Git Bash
+
+```bash
+git commit -m "feat(parser): add support for config files" \
+            -m "Adds YAML and JSON config parsing modules.\n\nIncludes unit tests and default config loading." \
+            -m "Closes #42"
+```

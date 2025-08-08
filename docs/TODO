@@ -6,6 +6,6 @@
 
 [X] Add support for doxygen
 
-[] add command availability and general workflow using commands
+[X] add command availability and general workflow using commands
 
-[] Add github commit naming convention
+[X] Add github commit naming convention
