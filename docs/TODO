@@ -9,3 +9,5 @@
 [X] add command availability and general workflow using commands
 
 [X] Add github commit naming convention
+
+[] When the flags for tests and benchmarks are not created do not include the CPM call to download them
