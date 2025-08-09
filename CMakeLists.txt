@@ -86,6 +86,22 @@ add_executable(CMakeTest
   source/main.cc
 )
 
+#---Add the option for choosing the release type. If the flag is not called, it is chosen in the terminal
+
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING
+      "Choose the type of build: Debug Release RelWithDebInfo MinSizeRel." FORCE)
+endif()
+
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  target_compile_definitions(CMakeTest PRIVATE DEBUG_MODE)
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+  target_compile_definitions(CMakeTest PRIVATE NDEBUG)
+endif()
+
+
 #---link dependencies that are internal---#
 target_sources(CMakeTest PRIVATE ${CMAKE_CURRENT_LIST_DIR}/source/my_private_class/my_private_class.cc)
 
