@@ -1,0 +1,108 @@
+name: Release multi-platform with CPack packages
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    outputs:
+      package-path: ${{ steps.set-path.outputs.package-path }}
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure CMake
+      run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=g++
+
+    - name: Build project
+      run: cmake --build build --config Release
+
+    - name: Package with CPack
+      working-directory: build
+      run: cpack
+
+    - name: Get package path
+      id: set-path
+      run: |
+        PACKAGE_FILE=$(ls build/*.tgz build/*.tar.gz 2>/dev/null || echo "")
+        echo "package-path=$PACKAGE_FILE" >> $GITHUB_OUTPUT
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: linux-package
+        path: build/*.tgz
+
+  build-windows:
+    runs-on: windows-latest
+    outputs:
+      package-path: ${{ steps.set-path.outputs.package-path }}
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure CMake
+      run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=cl
+
+    - name: Build project
+      run: cmake --build build --config Release
+
+    - name: Package with CPack
+      working-directory: build
+      run: cpack
+
+    - name: Get package path
+      id: set-path
+      shell: powershell
+      run: |
+        $package = Get-ChildItem build/*.zip | Select-Object -First 1
+        echo "package-path=$($package.FullName)" >> $env:GITHUB_OUTPUT
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: windows-package
+        path: build/*.zip
+
+  release:
+    needs: [build-linux, build-windows]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Download Linux package
+      uses: actions/download-artifact@v3
+      with:
+        name: linux-package
+        path: ./linux
+
+    - name: Download Windows package
+      uses: actions/download-artifact@v3
+      with:
+        name: windows-package
+        path: ./windows
+
+    - name: Create GitHub Release
+      id: create_release
+      uses: actions/create-release@v1
+      with:
+        tag_name: ${{ github.ref_name }}
+        release_name: Release ${{ github.ref_name }}
+        body: Release multiplataforma automática para el tag ${{ github.ref_name }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Linux asset
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./linux/*.tgz
+        asset_name: appname-${{ github.ref_name }}-Linux.tgz
+        asset_content_type: application/gzip
+
+    - name: Upload Windows asset
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./windows/*.zip
+        asset_name: appname-${{ github.ref_name }}-Windows.zip
+        asset_content_type: application/zip
