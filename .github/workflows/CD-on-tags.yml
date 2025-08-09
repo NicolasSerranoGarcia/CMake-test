@@ -99,11 +99,17 @@ jobs:
         draft: false
         prerelease: false
 
+    - name: Find package file
+      id: find-package
+      run: |
+        FILE=$(ls ./linux/*.tgz ./linux/*.tar.gz 2>/dev/null | head -n 1)
+        echo "package_path=$FILE" >> $GITHUB_OUTPUT
+
     - name: Upload Linux asset
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./linux/*
+        asset_path: ${{ steps.find-package.outputs.package_path }}
         asset_name: appname-${{ github.ref_name }}-Linux.tgz
         asset_content_type: application/gzip
 
