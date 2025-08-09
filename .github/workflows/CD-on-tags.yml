@@ -87,7 +87,7 @@ jobs:
       with:
         tag_name: ${{ github.ref_name }}
         release_name: Release ${{ github.ref_name }}
-        body: Release multiplataforma automática para el tag ${{ github.ref_name }}
+        body: Automatic release created with the tag ${{ github.ref_name }}
         draft: false
         prerelease: false
 
