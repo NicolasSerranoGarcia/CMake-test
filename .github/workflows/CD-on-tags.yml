@@ -77,6 +77,8 @@ jobs:
 
     - name: Download Linux package
       uses: actions/download-artifact@v5
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         name: linux-package
         path: ./linux
@@ -107,6 +109,8 @@ jobs:
 
     - name: Upload Linux asset
       uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ${{ steps.find-package.outputs.package_path }}
@@ -115,6 +119,8 @@ jobs:
 
     - name: Upload Windows asset
       uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./windows/*.zip
