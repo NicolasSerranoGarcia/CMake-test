@@ -59,25 +59,6 @@ include(${CMAKE_SOURCE_DIR}/cmake/benchmark.cmake)
 
 include(cmake/CPM.cmake)
 
-#---add google tests with CPM---#
-
-CPMAddPackage(
-  NAME GoogleTest
-  GITHUB_REPOSITORY google/googletest
-  GIT_TAG v1.14.0
-  OPTIONS "INSTALL_GTEST OFF"
-  OPTIONS "BENCHMARK_DOWNLOAD_DEPENDENCIES=ON"
-)
-
-#---Add google benchmark with CPM---#
-
-CPMAddPackage(
-  NAME benchmark
-  GITHUB_REPOSITORY google/benchmark
-  GIT_TAG v1.7.1
-  OPTIONS "BENCHMARK_ENABLE_TESTING OFF"
-)
-
 #---Create executable---#
 
 #create the executable from the main function.
