@@ -32,7 +32,9 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: linux-package
-        path: build/*.tgz
+        path: |
+          build/*.tgz
+          build/*.tar.gz
 
   build-windows:
     runs-on: windows-latest
@@ -95,7 +97,7 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./linux/*.tgz
+        asset_path: ./linux/*
         asset_name: appname-${{ github.ref_name }}-Linux.tgz
         asset_content_type: application/gzip
 
