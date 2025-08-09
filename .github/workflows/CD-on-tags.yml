@@ -117,12 +117,18 @@ jobs:
         asset_name: appname-${{ github.ref_name }}-Linux.tgz
         asset_content_type: application/gzip
 
+    - name: Find Windows package file
+      id: find-windows-package
+      run: |
+        FILE=$(ls ./windows/*.zip | head -n 1)
+        echo "package_path=$FILE" >> $GITHUB_OUTPUT
+
     - name: Upload Windows asset
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./windows/*.zip
+        asset_path: ${{ steps.find-windows-package.outputs.package_path }}
         asset_name: appname-${{ github.ref_name }}-Windows.zip
         asset_content_type: application/zip
