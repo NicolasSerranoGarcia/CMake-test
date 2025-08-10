@@ -37,6 +37,10 @@ target_compile_options(CMakeTest-compiler-flags INTERFACE
                         "$<${is-msvc-cxx}:$<BUILD_INTERFACE:-W3>>"
 )
 
+#---Add CPM installer from cmake/---#
+
+include(cmake/CPM.cmake)
+
 #---Add debug flags defined in tools.cmake---#
 
 include(${CMAKE_SOURCE_DIR}/cmake/tools.cmake)
@@ -54,10 +58,6 @@ include(${CMAKE_SOURCE_DIR}/cmake/test.cmake)
 #that does. So the benchmark is only accessible from this CMakeLists.txt
 #when the flag BUILD_BENCHMARK is set to true.
 include(${CMAKE_SOURCE_DIR}/cmake/benchmark.cmake)
-
-#---Add CPM installer from cmake/---#
-
-include(cmake/CPM.cmake)
 
 #---Create executable---#
 
