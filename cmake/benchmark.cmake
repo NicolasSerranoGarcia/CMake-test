@@ -9,7 +9,7 @@ if(BUILD_BENCHMARK)
 
     #---Add google benchmark with CPM---#
 
-    include(CPM.cmake)
+    include(${CMAKE_SOURCE_DIR}/cmake/CPM.cmake)
 
     CPMAddPackage(
         NAME benchmark
