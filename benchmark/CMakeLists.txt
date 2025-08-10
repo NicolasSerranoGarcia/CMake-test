@@ -19,7 +19,3 @@ target_include_directories(this_benchmark PRIVATE ${CMAKE_SOURCE_DIR}/source/my_
 target_link_libraries(this_benchmark PRIVATE my_class_library)
 
 #---2. ...---#
-
-#---When doing cmake --install . send the executable to the binary dir---#
-
-install(TARGETS this_benchmark DESTINATION bin)
