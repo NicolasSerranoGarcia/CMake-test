@@ -64,13 +64,12 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest --build-config ${{ matrix.build_type }}
 
-    - name: Run benchmark cross-platform
+    - name: Run benchmark on Linux
+      if: matrix.os == 'ubuntu-latest'
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
-      shell: ${{ runner.os == 'Windows' && 'powershell' || 'bash' }}
-      run: |
-        if ($IsWindows) {
-          .\this_benchmark.exe
-        } else {
-          ./this_benchmark
-        }
+      run: ./this_benchmark
 
+    - name: Run benchmark on Windows
+      if: matrix.os == 'windows-latest'
+      working-directory: ${{ steps.strings.outputs.build-output-dir }}
+      run: .\this_benchmark.exe
