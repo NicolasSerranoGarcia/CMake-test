@@ -75,5 +75,5 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: |
         Set-Location -Path '${{ steps.strings.outputs.build-output-dir }}'
-        .\this_benchmark.exe
+        .\this_benchmark
       shell: powershell
