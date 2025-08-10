@@ -52,8 +52,6 @@ jobs:
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         -DBUILD_TESTS=ON
         -DBUILD_BENCHMARK=ON
-        -DUSE_SANITIZER="Leak;Address;Memory"
-        -DUSE_STATIC_ANALYZER="clang-tidy;iwyu;cppcheck"
         -S ${{ github.workspace }}
 
     - name: Build

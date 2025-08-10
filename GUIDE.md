@@ -97,13 +97,13 @@ Note that it doesn't make sense to use the upcoming flags for a release type.
 Enable runtime checks for common bugs:
 
 ```bash
-cmake .. -DUSE_SANITIZER=Address
-cmake .. -DUSE_SANITIZER=Thread
-cmake .. -DUSE_SANITIZER=Memory
-cmake .. -DUSE_SANITIZER=MemoryWithOrigins
-cmake .. -DUSE_SANITIZER=Undefined
-cmake .. -DUSE_SANITIZER=Leak
-cmake .. -DUSE_SANITIZER="Address;Undefined"  # multiple sanitizers
+cmake .. -DUSE_SANITIZER=address
+cmake .. -DUSE_SANITIZER=thread
+cmake .. -DUSE_SANITIZER=memory #Not available 
+cmake .. -DUSE_SANITIZER=memorywithorigins #Not available
+cmake .. -DUSE_SANITIZER=undefined
+cmake .. -DUSE_SANITIZER=leak
+cmake .. -DUSE_SANITIZER="address;undefined"  # multiple sanitizers
 ```
 
 
@@ -111,12 +111,26 @@ cmake .. -DUSE_SANITIZER="Address;Undefined"  # multiple sanitizers
 
 Run static analysis tools during the build:
 
+
+Note that this tools are only available for Linux. Also note that you need to install the tools you want to use. 
+
+To install all three run 
+
+```bash
+sudo apt install clang-tidy
+sudo apt install cppcheck
+sudo apt install iwyu
+```
+on your terminal.
+
 ```bash
 cmake .. -DUSE_STATIC_ANALYZER=clang-tidy
 cmake .. -DUSE_STATIC_ANALYZER=cppcheck
 cmake .. -DUSE_STATIC_ANALYZER=iwyu
-cmake .. -DUSE_STATIC_ANALYZER="clang-tidy;iwyu;cppcheck"  # multiple tools
+cmake .. -DUSE_STATIC_ANALYZER="clang-tidy;cppcheck"  # multiple tools
 ```
+
+> Note: this tools will scan ALL your project, including third-party dependencies. This means it will scan libraries which will be superfluous in most cases, so keep in mind when using it
 
 ---
 
@@ -138,18 +152,6 @@ Run to create platform-specific install packages:
 ```bash
 cpack
 ```
-
----
-
-## 🧪 CTest Modes
-
-CTest provides different modes for testing:
-
-| Command                   | Description                          |
-|---------------------------|--------------------------------------|
-| `ctest -D Experimental`   | For local development testing        |
-| `ctest -D Nightly`        | For daily scheduled testing          |
-| `ctest -D Continuous`     | For CI/CD pipelines (on push, etc.)  |
 
 ---
 
