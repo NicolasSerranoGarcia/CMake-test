@@ -139,22 +139,22 @@ jobs:
 
           1. Download the \`.tgz\` package and extract it:
 
-          \`\`\`bash
+          ```bash
           tar -xzf package-name.tgz
-          \`\`\`
+          ```
 
           2. Navigate into the extracted folder and run the executable:
 
-          \`\`\`bash
+          ```bash
           cd package-name
           ./appname
-          \`\`\`
+          ```
 
           3. Make sure you have execute permissions; if not, add them with:
 
-          \`\`\`bash
+          ```bash
           chmod +x appname
-          \`\`\`
+          ```
 
           No additional dependencies are required if using the provided package.
 
