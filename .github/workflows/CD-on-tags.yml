@@ -111,7 +111,55 @@ jobs:
         tag_name: ${{ github.ref_name }}
         release_name: Release ${{ github.ref_name }}
         body: |
-          🚀 **Release notes** (automatically gnerated)
+          ### 🔒 Windows Security Notice
+
+          ⚠️ When running the \`.exe\` for the first time, Windows may display a **"Windows protected your PC"** warning. This is expected and happens because the file is not digitally signed (I don't have the resources to purchase a digital signature ;) )
+
+          This application is safe to use and does **not** contain any malware. The warning appears simply because the executable is new and unsigned.
+
+          #### How to run the application on Windows:
+
+          First, download the zip file and decompress it
+
+          1. After launching the \`.exe\`, if you see the blue "Windows protected your PC" screen:
+            - Click on **"More info"**
+            - Then click on **"Run anyway"**
+
+          <p align="center">
+          <img width="367" height="323" alt="image" src="./assets/windows-security-screen.png" />
+          </p>
+
+          2. Make sure all \`.dll\` files remain in the same folder as the \`.exe\`.
+
+          3. You do **not** need to install anything else — all dependencies are included.
+
+          ---
+
+          #### How to run the application on Linux:
+
+          1. Download the \`.tgz\` package and extract it:
+
+          \`\`\`bash
+          tar -xzf package-name.tgz
+          \`\`\`
+
+          2. Navigate into the extracted folder and run the executable:
+
+          \`\`\`bash
+          cd package-name
+          ./appname
+          \`\`\`
+
+          3. Make sure you have execute permissions; if not, add them with:
+
+          \`\`\`bash
+          chmod +x appname
+          \`\`\`
+
+          No additional dependencies are required if using the provided package.
+
+
+          🚀 **Release notes** (automatically generated)
 
           ${{ steps.notes.outputs.notes }}
 
