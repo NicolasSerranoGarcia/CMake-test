@@ -137,7 +137,7 @@ jobs:
 
           #### How to run the application on Linux:
 
-          1. Download the \`.tgz\` package and extract it:
+          1. Download the `.tgz` package and extract it:
 
           ```bash
           tar -xzf package-name.tgz
