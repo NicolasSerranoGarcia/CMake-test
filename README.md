@@ -12,6 +12,5 @@ Technologies used:
 - Doxygen
 - Github Actions:
   - For CI on *main* (runs tests and benchmark on PR's and commits)
-  - To automatically create a release with a package for each OS when a tag is pushed to main
-  - (Not implemented yet) Add release notes automatically by looking at commit history or other params
+  - To automatically create a release with a package for each OS when a tag is pushed to main. It also adds release notes automatically by looking at PR's.
   - To run tests in debug mode with the implemented debug flags when in a branch that's not main or docs/
