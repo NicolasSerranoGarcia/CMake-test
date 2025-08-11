@@ -1,6 +1,7 @@
 permissions:
   contents: write
   issues: read
+  pull-requests: read
 
 name: Release multi-platform with CPack packages
 
@@ -77,8 +78,6 @@ jobs:
 
     - name: Download Linux package
       uses: actions/download-artifact@v5
-      env:
-        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
       with:
         name: linux-package
         path: ./linux
@@ -89,6 +88,45 @@ jobs:
         name: windows-package
         path: ./windows
 
+    - name: Generate dynamic release notes
+      id: notes
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        TAG: ${{ github.ref_name }}
+      run: |
+        PREV_TAG=$(git describe --tags --abbrev=0 "${TAG}^" 2>/dev/null || echo "")
+        
+        # Fetch PRs between tags
+        if [ -n "$PREV_TAG" ]; then
+          RANGE="$PREV_TAG..$TAG"
+        else
+          RANGE="$TAG"
+        fi
+
+        FIXES=$(gh pr list --search "$RANGE" --state merged --json title,number,labels --jq '.[] | select(.labels[].name=="fix") | "- PR #" + (.number|tostring) + ": " + .title')
+        FEATURES=$(gh pr list --search "$RANGE" --state merged --json title,number,labels --jq '.[] | select(.labels[].name=="feature") | "- PR #" + (.number|tostring) + ": " + .title')
+
+        echo "## Release Notes" > release_notes.md
+        echo "" >> release_notes.md
+        echo "**Generic message placeholder**" >> release_notes.md
+        echo "" >> release_notes.md
+
+        if [ -n "$FEATURES" ]; then
+          echo "### 🚀 Features" >> release_notes.md
+          echo "$FEATURES" >> release_notes.md
+          echo "" >> release_notes.md
+        fi
+
+        if [ -n "$FIXES" ]; then
+          echo "### 🐛 Fixes" >> release_notes.md
+          echo "$FIXES" >> release_notes.md
+          echo "" >> release_notes.md
+        fi
+
+        echo "body<<EOF" >> $GITHUB_OUTPUT
+        cat release_notes.md >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+
     - name: Create GitHub Release
       id: create_release
       uses: actions/create-release@v1
@@ -97,7 +135,7 @@ jobs:
       with:
         tag_name: ${{ github.ref_name }}
         release_name: Release ${{ github.ref_name }}
-        body: Automatic release created with the tag ${{ github.ref_name }}
+        body: ${{ steps.notes.outputs.body }}
         draft: false
         prerelease: false
 
